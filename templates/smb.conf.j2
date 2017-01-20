@@ -1,0 +1,72 @@
+## ansible managed.. do not edit by hand !
+###########################################
+
+
+[global]
+
+ workgroup = {{ samba_workgroup }}
+ server string = {{ samba_server_string }}
+ server role = {{ samba_server_role }}
+ local master = {{ samba_local_master }}
+ domain master = {{ samba_domain_master }}
+ preferred master = {{ samba_preferred_master }}
+{% if samba_host_allow != '' %}
+ hosts allow = {{ samba_host_allow }}
+{% endif %}
+
+{% if samba_guest_account != '' %}
+ guest account = {{ samba_guest_account }}
+{% endif %}
+
+ log file = {{ samba_log_file }}
+ max log size = {{ samba_max_log_size }}
+
+{% if samba_realm != '' %}
+ realm = {{ samba_realm }}
+{% endif %} 
+
+ passdb backend = {{ samba_passdb_backend }}
+
+{% if samba_include != '' %}
+ include = {{ samba_include }}
+{% endif %}
+
+{% if samba_interfaces != '' %}
+ interfaces = {{ samba_interfaces }}
+{% endif %}
+
+ dns proxy = {{ samba_dns_proxy }}
+
+{% for option in samba_additional_settings %}
+ {{ option }}
+{% endfor %}
+
+ load printers = no
+
+#============================ Share Definitions ==============================
+{% if samba_share_homes %}
+[homes]
+  comment = Home Directories
+  browseable = no
+  writable = yes
+{% endif %}
+
+{% if samba_shares |length > 0 %}
+{% for share in samba_shares %}
+[ {{ share.name }} ]
+ {% if share.comment is defined %}
+ comment = {{ share.comment }}
+ {% endif %}
+ path = {{ share.path }}
+ browseable = {{ share.browseable|default('yes') }}
+ public = {{ share.public|default('no') }}
+ read only = {{ share.read_only|default('no') }}
+ writable = {{ share.writable|default('no') }}
+ {% if share.valid_users is defined %}
+ valid users= {{ share.valid_users }}
+ {% endif %}
+ {% if share.write_list is defined %}
+ write list = {{ share.write_list }}
+ {% endif %}
+{% endfor %}
+{% endif %}

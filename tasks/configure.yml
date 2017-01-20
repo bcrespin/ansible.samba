@@ -1,0 +1,4 @@
+---
+- name: samba config file
+  template: src=smb.conf.j2 dest={{ samba_config }} owner=root group={{ root_group }} mode=0644
+  

@@ -1,0 +1,3 @@
+---
+__samba_pkg: 'samba--'
+root_group: 'wheel'
