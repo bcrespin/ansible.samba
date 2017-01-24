@@ -1,2 +1,9 @@
 ---
 # handlers file for ansible.samba
+- name: service reload
+  service: name={{ samba_service_name }} state=reloaded enabled=yes
+  when: ansible_os_family != 'OpenBSD'
+
+- name: service reload
+  command: /etc/rc.d/samba reload
+  when: ansible_os_family == 'OpenBSD'

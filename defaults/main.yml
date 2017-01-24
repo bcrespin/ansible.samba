@@ -3,6 +3,7 @@
 
 __samba_pkg: 'samba4'
 samba_config: /etc/samba/smb.conf
+samba_service_name: samba
 
 root_group: root
 
@@ -17,7 +18,7 @@ samba_guest_account: ''
 samba_log_file: '/var/log/samba/smbd.%m'
 samba_max_log_size: 50
 samba_realm: ''
-samba_passdb_backend: tbdsam
+samba_passdb_backend: tdbsam
 samba_include: ''
 samba_interfaces: ''
 samba_dns_proxy: 'no'

@@ -53,20 +53,23 @@
 
 {% if samba_shares |length > 0 %}
 {% for share in samba_shares %}
-[ {{ share.name }} ]
- {% if share.comment is defined %}
+[{{ share.name }}]
+{% if share.comment is defined %}
  comment = {{ share.comment }}
- {% endif %}
+{% endif %}
  path = {{ share.path }}
+{% if share.guest_ok is defined %}
+ guest ok = yes
+{% endif %}
  browseable = {{ share.browseable|default('yes') }}
  public = {{ share.public|default('no') }}
  read only = {{ share.read_only|default('no') }}
  writable = {{ share.writable|default('no') }}
- {% if share.valid_users is defined %}
+{% if share.valid_users is defined %}
  valid users= {{ share.valid_users }}
- {% endif %}
- {% if share.write_list is defined %}
+{% endif %}
+{% if share.write_list is defined %}
  write list = {{ share.write_list }}
- {% endif %}
+{% endif %}
 {% endfor %}
 {% endif %}
