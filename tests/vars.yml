@@ -1,0 +1,16 @@
+---
+samba_share_homes: True
+samba_shares:
+  - name: share1
+    path: /share1
+    writable: 'yes'
+    valid_users: '@homeusers'
+    create_mask: 0775
+    dir_mask: 0775
+    follow_simlinks: 'yes'
+    wide_links: 'yes'
+  - name: share2
+    path: /share2
+    browseable: 'no'
+    additional_options:
+      - "wide links = yes"

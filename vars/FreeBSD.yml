@@ -1,0 +1,5 @@
+---
+__samba_pkg: 'samba44'
+root_group: 'wheel'
+samba_config: /usr/local/etc/smb4.conf
+samba_service_name: samba_server

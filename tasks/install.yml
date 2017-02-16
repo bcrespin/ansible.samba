@@ -8,4 +8,3 @@
   pkgng: name='{{ samba_pkg }}' state=present
   when:
     - ansible_os_family == 'FreeBSD' 
-

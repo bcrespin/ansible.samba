@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: True
+  vars_files:
+    - vars.yml
+  pre_tasks:
+    - name: create folders to share
+      file: path="/share{{ item }}" state=directory
+      with_sequence: start=0 end=10
+    - name: tweak for service (FreeBSD)
+      lineinfile:
+        dest: /etc/rc.conf.local 
+        line: 'samba_server_enable="YES"'
+        create: yes
+      when: ansible_os_family == 'FreeBSD'
+  roles:
+    - { role: ../../ansible.samba }

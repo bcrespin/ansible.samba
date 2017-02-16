@@ -15,7 +15,6 @@ samba_domain_master: 'no'
 samba_preferred_master: 'no'
 samba_host_allow: ''
 samba_guest_account: ''
-samba_log_file: '/var/log/samba/smbd.%m'
 samba_max_log_size: 50
 samba_realm: ''
 samba_passdb_backend: tdbsam
